@@ -14,18 +14,18 @@ import lombok.RequiredArgsConstructor;
 public class Role implements Comparable<Role> {
 
     private int id;
-    private String role_title;
+    private String title;
     private String description;
 
     public Role(String role_title, String description) {
-        this.role_title = role_title;
+        this.title = role_title;
         this.description = description;
     }
 
     @Override
     public String toString(){
         String text="";
-        text+=this.getId()+","+this.getRole_title()+","+this.getDescription();
+        text+=this.getId()+","+this.getTitle()+","+this.getDescription();
         return text;
     }
 
@@ -37,9 +37,9 @@ public class Role implements Comparable<Role> {
 
     @Override
     public int compareTo(Role role){
-        if(this.getRole_title().compareTo(role.getRole_title())==1) {
+        if(this.getTitle().compareTo(role.getTitle())==1) {
             return 1;
-        }else if(this.getRole_title().compareTo(role.getRole_title())==-1){
+        }else if(this.getTitle().compareTo(role.getTitle())==-1){
                     return -1;
                 }else{
             return 0;
