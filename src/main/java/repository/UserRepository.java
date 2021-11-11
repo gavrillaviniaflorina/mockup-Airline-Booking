@@ -73,4 +73,32 @@ public class UserRepository {
         update+=String.format("where name='%s'",name);
         executeStatement(update);
     }
+
+    private ResultSet all(){
+
+        executeStatement("select * from user");
+
+        try{
+            return statement.getResultSet();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<User> allUsers(){
+
+        ResultSet set=all();
+        List<User> users=new ArrayList<>();
+        try{
+            while(set.next()){
+                users.add(new User(set.getInt(1),set.getInt(2),set.getString(3),set.getString(4), set.getString(5)));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return users;
+    }
 }

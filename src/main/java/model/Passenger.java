@@ -15,15 +15,15 @@ public class Passenger implements Comparable<Passenger> {
     private String name;
     private String  mobile;
     private String email;
-    private String username;
+   // private String username;
     private String password;
     private String address;
 
-    public Passenger(String name, String mobile, String email, String username, String password, String address) {
+    public Passenger(String name, String mobile, String email,  String password, String address) {
         this.name = name;
         this.mobile = mobile;
         this.email = email;
-        this.username = username;
+       // this.username = username;
         this.password = password;
         this.address = address;
     }
@@ -33,7 +33,7 @@ public class Passenger implements Comparable<Passenger> {
     @Override
     public String toString(){
         String text="";
-        text+=this.getId()+","+this.getName()+","+this.getName()+","+this.getMobile()+","+this.getEmail()+","+this.getUsername()+","+this.getPassword()+","+this.getAddress();
+        text+=this.getId()+","+this.getName()+","+this.getName()+","+this.getMobile()+","+this.getEmail()+","+this.getPassword()+","+this.getAddress();
         return text;
     }
 

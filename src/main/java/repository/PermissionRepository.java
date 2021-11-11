@@ -1,22 +1,17 @@
 package repository;
-
-
-
-import model.Role;
+import model.Permission;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-public class RoleRepository {
-
+public class PermissionRepository {
     private String JdbcURl="jdbc:mysql://localhost:3306/airline";
     private String username="root";
     private String password="root";
     private Connection connection=null;
     private Statement statement=null;
 
-    public RoleRepository(){
+    public PermissionRepository(){
         try {
             connection = DriverManager.getConnection(JdbcURl, username, password);
             statement = connection.createStatement();
@@ -36,40 +31,41 @@ public class RoleRepository {
         }
     }
 
-    public void insert(Role role){
+
+    public void insert(Permission permission){
         String insert="";
-        insert+="insert into role (title, description) values (";
-        insert+=String.format("'%s','%s'",role.getTitle(),role.getDescription());
+        insert+="insert into permission (role_id, title, description ) values (";
+        insert+=String.format("%d,'%s','%s'",permission.getRole_id(), permission.getTitle(),permission.getDescription());
         insert+=");";
         executeStatement(insert);
     }
 
-    public void delete(String id){
+    public void delete(String title){
         String delete="";
-        delete+=String.format("delete form role where id=%d");
+        delete+=String.format("delete from permission where title='%s'",title);
         delete+=";";
         executeStatement(delete);
-
-
     }
 
-    public void updateTitle(String old, String new_title){
+    public void updateTitle( String old,String title){
+
         String update="";
-        update+=String.format("update role set title='%s'",new_title);
+        update+=String.format("update permission set title='%s'",title);
         update+=String.format("where title='%s'",old);
         executeStatement(update);
     }
 
-    public void updateDescription(int id, String desctiption){
+    public void updateDesccription( String title,String description){
+
         String update="";
-        update+=String.format("update role set desription='%s'",desctiption);
-        update+=String.format("where id=%d",id);
+        update+=String.format("update permission set description='%s'",description);
+        update+=String.format("where title='%s'",title);
         executeStatement(update);
     }
 
     private ResultSet all(){
 
-        executeStatement("select * from role");
+        executeStatement("select * from permission");
 
         try{
             return statement.getResultSet();
@@ -80,19 +76,18 @@ public class RoleRepository {
         }
     }
 
-    public List<Role> allRoles(){
+    public List<Permission> allPermissions(){
 
         ResultSet set=all();
-        List<Role> roles=new ArrayList<>();
+        List<Permission> permissions=new ArrayList<>();
         try{
             while(set.next()){
-                roles.add(new Role(set.getString(1),set.getString(2)));
+               permissions.add(new Permission(set.getInt(1),set.getString(2),set.getString(3)));
             }
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
-        return roles;
+        return permissions;
     }
-
 }

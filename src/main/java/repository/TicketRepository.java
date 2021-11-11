@@ -79,12 +79,39 @@ public class TicketRepository {
         executeStatement(update);
     }
 
-
     public void updateNewDate(String old, String date){
         String update="";
         update+=String.format("update ticket set date='%s'",date);
         update+=String.format("where date='%s'",old);
         executeStatement(update);
+    }
+
+    private ResultSet all(){
+
+        executeStatement("select * from ticket");
+
+        try{
+            return statement.getResultSet();
+
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<Ticket> allTickets(){
+
+        ResultSet set=all();
+        List<Ticket> tickets=new ArrayList<>();
+        try{
+            while(set.next()){
+                tickets.add(new Ticket(set.getString(1),set.getInt(2),set.getString(3)));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        return tickets;
     }
 
 

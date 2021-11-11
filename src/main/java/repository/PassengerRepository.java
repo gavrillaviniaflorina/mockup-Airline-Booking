@@ -1,14 +1,11 @@
 package repository;
-
-
-
-import model.Role;
+import model.Passenger;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RoleRepository {
+public class PassengerRepository {
 
     private String JdbcURl="jdbc:mysql://localhost:3306/airline";
     private String username="root";
@@ -16,7 +13,7 @@ public class RoleRepository {
     private Connection connection=null;
     private Statement statement=null;
 
-    public RoleRepository(){
+    public PassengerRepository(){
         try {
             connection = DriverManager.getConnection(JdbcURl, username, password);
             statement = connection.createStatement();
@@ -36,40 +33,48 @@ public class RoleRepository {
         }
     }
 
-    public void insert(Role role){
+    public void insert(Passenger passenger){
         String insert="";
-        insert+="insert into role (title, description) values (";
-        insert+=String.format("'%s','%s'",role.getTitle(),role.getDescription());
+        insert+="insert into passenger ( name,mobile,email,password,address) values (";
+        insert+=String.format("'%s','%s','%s','%s','%s'", passenger.getName(),passenger.getMobile(),passenger.getEmail(),passenger.getPassword(),passenger.getAddress());
         insert+=");";
         executeStatement(insert);
     }
 
-    public void delete(String id){
+    public void delete(String name){
         String delete="";
-        delete+=String.format("delete form role where id=%d");
+        delete+=String.format("delete from passenger where name='%s'",name);
         delete+=";";
         executeStatement(delete);
-
-
     }
 
-    public void updateTitle(String old, String new_title){
+    public void updateMobile( String name,String mobile){
+
         String update="";
-        update+=String.format("update role set title='%s'",new_title);
-        update+=String.format("where title='%s'",old);
+        update+=String.format("update passenger set mobile='%s'",mobile);
+        update+=String.format("where name='%s'",name);
         executeStatement(update);
     }
 
-    public void updateDescription(int id, String desctiption){
+    public void updateEmail( String name,String email){
+
         String update="";
-        update+=String.format("update role set desription='%s'",desctiption);
-        update+=String.format("where id=%d",id);
+        update+=String.format("update passenger set email='%s'",email);
+        update+=String.format("where name='%s'",name);
+        executeStatement(update);
+    }
+
+    public void updateAddress( String name,String address){
+
+        String update="";
+        update+=String.format("update passenger set address='%s'",address);
+        update+=String.format("where name='%s'",name);
         executeStatement(update);
     }
 
     private ResultSet all(){
 
-        executeStatement("select * from role");
+        executeStatement("select * from passenger");
 
         try{
             return statement.getResultSet();
@@ -80,19 +85,19 @@ public class RoleRepository {
         }
     }
 
-    public List<Role> allRoles(){
+    public List<Passenger> allPassengers(){
 
         ResultSet set=all();
-        List<Role> roles=new ArrayList<>();
+        List<Passenger> passengers=new ArrayList<>();
         try{
             while(set.next()){
-                roles.add(new Role(set.getString(1),set.getString(2)));
+               passengers.add(new Passenger(set.getString(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5)));
             }
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
-        return roles;
+        return passengers;
     }
 
 }
