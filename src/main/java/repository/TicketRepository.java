@@ -58,17 +58,17 @@ public class TicketRepository {
         executeStatement(update);
     }
 
-    public void updateCustomerId(int id, int customer_id){
+    public void updatePassengerId(int id, int passenger_id){
         String update="";
-        update+=String.format("update ticket set customer_id=%d",customer_id);
+        update+=String.format("update ticket set passenger_id=%d",passenger_id);
         update+=String.format("where id=%d",id);
         executeStatement(update);
     }
 
-    public void updateNewCustomerId(int old, int customer_id){
+    public void updateNewPassengerId(int old, int passenger_id){
         String update="";
-        update+=String.format("update ticket set customer_id=%d",customer_id);
-        update+=String.format("where customer_id=%d",old);
+        update+=String.format("update ticket set passenger_id=%d",passenger_id);
+        update+=String.format("where passenger_id=%d",old);
         executeStatement(update);
     }
 
