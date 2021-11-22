@@ -37,7 +37,7 @@ public class TicketRepository {
     public void insert(Ticket ticket){
         String insert="";
         insert+="insert into ticket (description, customer_id, date) values (";
-        insert+=String.format("'%s',%d,'%s'",ticket.getDescription(),ticket.getCustomer_id(),ticket.getDate());
+        insert+=String.format("'%s',%d,'%s'",ticket.getDescription(),ticket.getPassenger_id(),ticket.getDate());
         insert+=");";
         executeStatement(insert);
     }

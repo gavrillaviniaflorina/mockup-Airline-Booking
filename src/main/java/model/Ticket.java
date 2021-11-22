@@ -2,8 +2,6 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 
 
 @Data
@@ -15,19 +13,19 @@ public class Ticket implements Comparable<Ticket> {
 
     private int id;
     private String description;
-    private int customer_id;
+    private int passenger_id;
     private String date;
 
     public Ticket(String description, int customer_id, String date) {
         this.description = description;
-        this.customer_id = customer_id;
+        this.passenger_id = customer_id;
         this.date = date;
     }
 
     @Override
     public String toString(){
         String text="";
-        text+=this.getId()+","+this.getDescription()+","+this.getCustomer_id()+","+this.getDate();
+        text+=this.getId()+","+this.getDescription()+","+this.getPassenger_id()+","+this.getDate();
         return text;
     }
 

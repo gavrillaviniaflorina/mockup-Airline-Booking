@@ -91,7 +91,7 @@ public class PassengerRepository {
         List<Passenger> passengers=new ArrayList<>();
         try{
             while(set.next()){
-               passengers.add(new Passenger(set.getString(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5)));
+               passengers.add(new Passenger(set.getString(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6)));
             }
         }catch (Exception e){
             e.printStackTrace();

@@ -1,14 +1,13 @@
 package repository;
+import model.Airline_Booking;
+import model.Passenger;
 
-
-
-import model.Role;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+public class AirlineBookingRepository {
 
-public class RoleRepository {
 
     private String JdbcURl="jdbc:mysql://localhost:3306/airline";
     private String username="root";
@@ -16,7 +15,7 @@ public class RoleRepository {
     private Connection connection=null;
     private Statement statement=null;
 
-    public RoleRepository(){
+    public AirlineBookingRepository(){
         try {
             connection = DriverManager.getConnection(JdbcURl, username, password);
             statement = connection.createStatement();
@@ -36,40 +35,50 @@ public class RoleRepository {
         }
     }
 
-    public void insert(Role role){
+    public void insert(Airline_Booking airlineBooking){
         String insert="";
-        insert+="insert into role (title, description) values (";
-        insert+=String.format("'%s','%s'",role.getTitle(),role.getDescription());
+        insert+="insert into airline_booking ( description,title,person_id,date) values (";
+        insert+=String.format("'%s','%s',%d,'%s",airlineBooking.getDescription(),airlineBooking.getTitle(),airlineBooking.getPerson_id(),airlineBooking.getDate());
         insert+=");";
         executeStatement(insert);
     }
 
     public void delete(String id){
         String delete="";
-        delete+=String.format("delete form role where id=%d");
+        delete+=String.format("delete from airline_booking where id=%d",id);
         delete+=";";
         executeStatement(delete);
-
-
     }
 
-    public void updateTitle(String old, String new_title){
+    public void updateDescription( String title,String description){
+
         String update="";
-        update+=String.format("update role set title='%s'",new_title);
+        update+=String.format("update airline_booking set description='%s'",description);
+        update+=String.format("where title='%s'",title);
+        executeStatement(update);
+    }
+
+
+    public void updateTitle( String old,String title){
+
+        String update="";
+        update+=String.format("update airline_booking set title='%s'",title);
         update+=String.format("where title='%s'",old);
         executeStatement(update);
     }
 
-    public void updateDescription(int id, String desctiption){
+    public void updateDate( String title,String date){
+
         String update="";
-        update+=String.format("update role set desription='%s'",desctiption);
-        update+=String.format("where id=%d",id);
+        update+=String.format("update airline_booking set date='%s'",date);
+        update+=String.format("where title='%s'",title);
         executeStatement(update);
     }
 
     private ResultSet all(){
 
-        executeStatement("select * from role");
+        executeStatement("select * from airline_booking");
+
 
         try{
             return statement.getResultSet();
@@ -80,19 +89,19 @@ public class RoleRepository {
         }
     }
 
-    public List<Role> allRoles(){
+    public List<Airline_Booking> allBookings(){
 
         ResultSet set=all();
-        List<Role> roles=new ArrayList<>();
+        List<Airline_Booking> booking=new ArrayList<>();
         try{
             while(set.next()){
-                roles.add(new Role(set.getString(1),set.getString(2)));
+               booking.add(new Airline_Booking(set.getString(1),set.getString(2),set.getString(3),set.getInt(4)));
             }
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
-        return roles;
+        return booking;
     }
 
 }

@@ -2,45 +2,46 @@ package model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-
 
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 
-public class User implements Comparable<User> {
+public class Person implements Comparable<Person> {
  private int id;
- private int role_id;
  private String name;
  private String email;
- private String adress;
+ private String password;
+ private String address;
+ private String role;
 
 
-    public User(int role_id, String name, String email, String adress) {
-        this.role_id = role_id;
+    public Person( String name, String email, String password,String address,String role) {
+
         this.name = name;
         this.email = email;
-        this.adress = adress;
+        this.password=password;
+        this.address = address;
+        this.role=role;
     }
 
     @Override
     public String toString(){
         String text="";
-        text+=this.getId()+","+this.getRole_id()+","+this.getName()+","+this.getEmail()+","+this.getAdress();
+        text+=this.getId()+","+this.getName()+","+this.getEmail()+","+this.getPassword()+","+this.getAddress()+","+this.getRole();
         return text;
     }
 
     @Override
     public boolean equals(Object obj){
-        User user=(User)obj;
+        Person user=(Person)obj;
        return user.getId()==this.getId();
 
     }
 
     @Override
-    public int compareTo(User user){
+    public int compareTo(Person user){
         if(this.getName().compareTo(user.getName())==1){
             return 1;
         }else if(this.getName().compareTo(user.getName())==-1){

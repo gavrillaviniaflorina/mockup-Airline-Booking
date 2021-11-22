@@ -13,20 +13,20 @@ public class Airline_Booking implements Comparable<Airline_Booking>{
     private String description;
     private String title;
     private String date;
-    private int passenger_id;
+    private int person_id;
 
 
     public Airline_Booking(String description, String title, String date, int passenger_id) {
         this.description = description;
         this.title = title;
         this.date = date;
-        this.passenger_id = passenger_id;
+        this.person_id = passenger_id;
     }
 
     @Override
     public String toString(){
         String text="";
-        text+=this.getId()+","+this.getDescription()+","+this.getTitle()+","+this.getDate()+","+this.getPassenger_id();
+        text+=this.getId()+","+this.getDescription()+","+this.getTitle()+","+this.getDate()+","+this.getPerson_id();
         return text;
     }
 
