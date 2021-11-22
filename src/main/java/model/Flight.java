@@ -14,9 +14,9 @@ public class Flight implements Comparable<Flight> {
     private String Name;
     private int duration;
     private String date;
-    private String noTickets;
+    private int noTickets;
 
-    public Flight(String name, int duration, String date, String noTickets) {
+    public Flight(String name, int duration, String date, int noTickets) {
         Name = name;
         this.duration = duration;
         this.date = date;

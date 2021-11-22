@@ -38,45 +38,45 @@ public class PersonRepository {
 
     public void insert(Person person){
         String insert="";
-        insert+="insert into person (role_id, name, email, adress) values (";
-        insert+=String.format("'%s','%s','%s',%d",person.getName(),person.getEmail(),person.getAdress(),person.getRole());
+        insert+="insert into person (name, email,password,role,adress) values (";
+        insert+=String.format("'%s','%s','%s','%s','%s'",person.getName(),person.getEmail(),person.getPassword(),person.getRole(),person.getAddress());
         insert+=");";
         executeStatement(insert);
     }
 
     public void delete(String name){
         String delete="";
-        delete+=String.format("delete form person where name='%s'");
+        delete+=String.format("delete from person where name='%s'",name);
         delete+=";";
         executeStatement(delete);
 
 
     }
 
-    public void updateRoleId(String name, String role){
+    public void updateRole(String name, String role){
         String update="";
-        update+=String.format("update person setrole='%s'",role);
+        update+=String.format("update person set role='%s'",role);
         update+=String.format("where name='%s'",name);
         executeStatement(update);
     }
 
-    public void updateNewRoleId(String old_role, String role){
+    public void updateNewRole(String old_role, String role){
         String update="";
-        update+=String.format("update person set role='%s",role);
-        update+=String.format("where role=%d",old_role);
+        update+=String.format("update person set role='%s'",role);
+        update+=String.format("where role='%s'",old_role);
         executeStatement(update);
     }
 
     public void updateAddress(String name, String address){
         String update="";
-        update+=String.format("update user set address='%s'",address);
+        update+=String.format("update person set address='%s'",address);
         update+=String.format("where name='%s'",name);
         executeStatement(update);
     }
 
     private ResultSet all(){
 
-        executeStatement("select * from user");
+        executeStatement("select * from person");
 
         try{
             return statement.getResultSet();
@@ -87,18 +87,24 @@ public class PersonRepository {
         }
     }
 
-    public List<Person> allUsers(){
+    public List<Person> allPersons(){
 
         ResultSet set=all();
         List<Person> users=new ArrayList<>();
         try{
             while(set.next()){
-                users.add(new Person(set.getInt(1),set.getString(2),set.getString(3), set.getString(4),set.getString(5)));
+                users.add(new Person(set.getString(1),set.getString(2),set.getString(3), set.getString(4),set.getString(5)));
             }
         }catch (Exception e){
             e.printStackTrace();
             return null;
         }
         return users;
+    }
+
+    public void deleteFromPerson(){
+        String delete="";
+        delete+=String.format("delete form person ;");
+        executeStatement(delete);
     }
 }

@@ -1,6 +1,6 @@
 package repository;
 import model.Airline_Booking;
-import model.Passenger;
+
 
 
 import java.sql.*;
