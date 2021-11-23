@@ -18,8 +18,8 @@ public class PersonController {
 
     }
 
-    public void delete(Person person){
-        personRepository.delete(person.getName());
+    public void delete(String name){
+        personRepository.delete(name);
     }
 
     public void updateRole(String name, String role){
@@ -34,6 +34,10 @@ public class PersonController {
         personRepository.updateAddress(name,address);
     }
 
+    public void updatePassword(String email, String password){
+        personRepository.updatePassword(email,password);
+    }
+
     public void display(){
         for(Person person: personRepository.allPersons()){
             System.out.println(person.toString());
@@ -43,6 +47,16 @@ public class PersonController {
     public Person personEmail( String email){
         for(Person person: personRepository.allPersons()){
             if(person.getEmail().equals(email)){
+                return person;
+            }
+        }
+
+        return new Person(-1,"","","","","");
+    }
+
+    public Person personName( String name){
+        for(Person person: personRepository.allPersons()){
+            if(person.getEmail().equals(name)){
                 return person;
             }
         }

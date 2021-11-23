@@ -67,6 +67,13 @@ public class PersonRepository {
         executeStatement(update);
     }
 
+    public void updatePassword(String email, String password){
+        String update="";
+        update+=String.format("update person set password='%s'",password);
+        update+=String.format("where email='%s'",email);
+        executeStatement(update);
+    }
+
     public void updateAddress(String name, String address){
         String update="";
         update+=String.format("update person set address='%s'",address);
