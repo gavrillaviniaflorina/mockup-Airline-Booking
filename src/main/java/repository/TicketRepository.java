@@ -42,7 +42,7 @@ public class TicketRepository {
         executeStatement(insert);
     }
 
-    public void delete(String id){
+    public void delete(int id){
         String delete="";
         delete+=String.format("delete form ticket where id=%d");
         delete+=";";

@@ -15,7 +15,7 @@ public class TicketController {
         ticketRepository.insert(ticket);
     }
 
-    public void delete(String id){
+    public void delete(int id){
         ticketRepository.delete(id);
     }
 
@@ -39,5 +39,16 @@ public class TicketController {
         for(Ticket ticket: ticketRepository.allTickets()){
             System.out.println(ticket.toString());
         }
+    }
+
+    public Ticket ticketId(int id){
+        for(Ticket ticket: ticketRepository.allTickets()) {
+            if (ticket.getId() == id) {
+                return ticket;
+            }
+        }
+                return new Ticket(-1,"",-1,"");
+
+
     }
 }

@@ -4,6 +4,7 @@ import controller.FlightController;
 import controller.PersonController;
 import controller.TicketController;
 import model.Person;
+import model.Ticket;
 
 import java.util.Scanner;
 
@@ -39,6 +40,9 @@ public class ViewAdmin {
         text+="Press 8 to change the duration of a flight\n";
         text+="Press 9 to change the duration of a flight\n";
         text+="Press 10 to change the number of tickets of a flight\n";
+        text+="Press 11 to see al the persons\n";
+        text+="Press 11 to see al the tickets\n";
+        text+="Press 12 to see al the flights\n";
 
 
 
@@ -112,5 +116,48 @@ public class ViewAdmin {
         }
         }
 
+    public void insertTicket(){
+
+        System.out.println("Please add the description");
+        String desc=scanner.nextLine();
+
+        System.out.println("Please add the date");
+        String date=scanner.nextLine();
+
+        System.out.println("Please add the passenger id");
+        int id=Integer.parseInt(scanner.nextLine());
+
+        Ticket ticket=new Ticket(desc,id,date);
+
+        ticketController.insert(ticket);
+        System.out.println("The ticket was added");
     }
+
+    public void updateTicket(){
+        System.out.println("Please write the id of the ticket");
+        int id=Integer.parseInt(scanner.nextLine());
+        if(ticketController.ticketId(id).getId()==-1){
+            System.out.println("The ticket does not exist!");
+        }else{
+            System.out.println("Please write the new passenger id");
+            int pId=Integer.parseInt(scanner.nextLine());
+            ticketController.updateCustomerId(id,pId);
+            System.out.println("The ticket was updated");
+        }
+    }
+
+    public void delteTicket(){
+        System.out.println("Please write the id of the ticket");
+        int id=Integer.parseInt(scanner.nextLine());
+        if(ticketController.ticketId(id).getId()==-1){
+            System.out.println("The ticket does not exist!");
+        }else {
+            ticketController.delete(id);
+            System.out.println("The ticket was deleted");
+
+        }
+        }
+    }
+
+
 }
