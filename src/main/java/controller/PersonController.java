@@ -39,4 +39,14 @@ public class PersonController {
             System.out.println(person.toString());
         }
     }
+
+    public Person personEmail( String email){
+        for(Person person: personRepository.allPersons()){
+            if(person.getEmail().equals(email)){
+                return person;
+            }
+        }
+
+        return new Person(-1,"","","","","");
+    }
 }
