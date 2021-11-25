@@ -50,7 +50,7 @@ public class FlightRepository {
         executeStatement(delete);
     }
 
-    public void updateNoTickets( String name,String number){
+    public void updateNoTickets( String name,int number){
 
         String update="";
         update+=String.format("update flight set noTickets=%d",number);

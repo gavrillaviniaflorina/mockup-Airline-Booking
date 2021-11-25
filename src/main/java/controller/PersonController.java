@@ -3,6 +3,8 @@ package controller;
 import model.Person;
 import repository.PersonRepository;
 
+import java.util.List;
+
 public class PersonController {
 
     private PersonRepository personRepository;
@@ -62,5 +64,10 @@ public class PersonController {
         }
 
         return new Person(-1,"","","","","");
+    }
+
+    public List<Person> allPersons(){
+        return personRepository.allPersons();
+
     }
 }

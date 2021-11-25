@@ -3,6 +3,8 @@ package controller;
 import model.Ticket;
 import repository.TicketRepository;
 
+import java.util.List;
+
 public class TicketController {
 
     private TicketRepository ticketRepository;
@@ -50,5 +52,9 @@ public class TicketController {
                 return new Ticket(-1,"",-1,"");
 
 
+    }
+
+    public List<Ticket> allTickets(){
+        return ticketRepository.allTickets();
     }
 }
