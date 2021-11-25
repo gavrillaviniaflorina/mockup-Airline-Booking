@@ -35,8 +35,8 @@ public class PassengerRepository {
 
     public void insert(Passenger passenger){
         String insert="";
-        insert+="insert into passenger ( name,mobile,email,password,address) values (";
-        insert+=String.format("'%s','%s','%s','%s','%s'", passenger.getName(),passenger.getMobile(),passenger.getEmail(),passenger.getPassword(),passenger.getAddress());
+        insert+="insert into passenger ( name,mobile,email,password,address,person_id) values (";
+        insert+=String.format("'%s','%s','%s','%s','%s',%d", passenger.getName(),passenger.getMobile(),passenger.getEmail(),passenger.getPassword(),passenger.getAddress(),passenger.getPerson_id());
         insert+=");";
         executeStatement(insert);
     }
@@ -91,7 +91,7 @@ public class PassengerRepository {
         List<Passenger> passengers=new ArrayList<>();
         try{
             while(set.next()){
-               passengers.add(new Passenger(set.getString(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6)));
+               passengers.add(new Passenger(set.getString(1),set.getString(2),set.getString(3),set.getString(4),set.getString(5),set.getString(6),set.getInt(7)));
             }
         }catch (Exception e){
             e.printStackTrace();

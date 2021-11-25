@@ -38,4 +38,13 @@ public class PassengerController {
             System.out.println(passenger.toString());
         }
     }
+
+    public int personPassenger(int person_id){
+        for(Passenger passenger: passengerRepository.allPassengers()){
+            if(passenger.getPerson_id()==person_id){
+                return passenger.getPerson_id();
+            }
+        }
+        return -1;
+    }
 }

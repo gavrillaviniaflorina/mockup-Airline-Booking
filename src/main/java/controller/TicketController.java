@@ -3,6 +3,7 @@ package controller;
 import model.Ticket;
 import repository.TicketRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TicketController {
@@ -56,5 +57,16 @@ public class TicketController {
 
     public List<Ticket> allTickets(){
         return ticketRepository.allTickets();
+    }
+
+    public List<Ticket> passengerTicket(int id){
+        List<Ticket> ticketList=new ArrayList<>();
+        for(Ticket ticket:allTickets()){
+            if(ticket.getPassenger_id()==id){
+                ticketList.add(ticket);
+
+            }
+        }
+        return ticketList;
     }
 }

@@ -1,18 +1,20 @@
 package view;
 
-import controller.AirlineBookingController;
-import controller.FlightController;
-import controller.PersonController;
+import controller.*;
 import model.Person;
+import model.Ticket;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class ViewUser {
     private Scanner scanner;
     private Person person;
     private AirlineBookingController airlineBookingController;
+    private TicketController ticketController;
     private FlightController flightController;
     private PersonController personController;
+    private PassengerController passengerController;
 
     public ViewUser(Person person) {
         this.person = person;
@@ -20,6 +22,8 @@ public class ViewUser {
         this.personController=new PersonController();
         this.airlineBookingController=new AirlineBookingController();
         this.flightController=new FlightController();
+        this.ticketController=new TicketController();
+        this.passengerController=new PassengerController();
     }
 
     private String meniu()
@@ -38,6 +42,25 @@ public class ViewUser {
     }
     public void play(){
 
+    }
+
+    private void allTickets(){
+        System.out.println("Please write your name");
+        String name=scanner.nextLine();
+        Person person= personController.personName(name);
+        if(person.getId()==1){
+            System.out.println("Incorrect name");
+        }else{
+            List<Ticket> ticketList=ticketController.passengerTicket(passengerController.personPassenger(person.getId()));
+            if(ticketList.isEmpty()){
+                System.out.println("You don't have any tickets");
+            }else{
+
+            for(Ticket ticket:ticketList) {
+                System.out.println(ticket);
+            }
+            }
+        }
     }
 
 

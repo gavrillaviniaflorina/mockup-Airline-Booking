@@ -14,11 +14,13 @@ import javax.swing.plaf.basic.BasicComboBoxUI;
 public class Passenger extends Person  {
     private int id;
     private String  mobile;
+    private int person_id;
 
 
-    public Passenger(String name,String email,String password, String address,String mobile,String role) {
+    public Passenger(String name,String email,String password, String address,String mobile,String role,int person_id) {
       super(name,email,password,address,role);
         this.mobile = mobile;
+        this.person_id=person_id;
 
     }
 
@@ -28,7 +30,7 @@ public class Passenger extends Person  {
     @Override
     public String toString(){
         String text="";
-        text+=this.getId()+","+this.getName()+","+this.getMobile()+","+this.getEmail()+","+this.getPassword()+","+this.getAddress();
+        text+=this.getId()+","+this.getName()+","+this.getMobile()+","+this.getEmail()+","+this.getPassword()+","+this.getAddress()+","+this.getPerson_id();
         return text;
     }
 
