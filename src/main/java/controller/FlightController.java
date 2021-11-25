@@ -3,6 +3,7 @@ package controller;
 import model.Flight;
 import repository.FlightRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FlightController {
@@ -42,5 +43,15 @@ public class FlightController {
 
     public List<Flight> allFlights(){
         return flightRepository.allFlights();
+    }
+
+    public List<Flight> searchFlight(String name){
+        List<Flight> flightList=new ArrayList<>();
+        for(Flight flight:flightRepository.allFlights()){
+            if(flight.getName().equals(flight)){
+                flightList.add(flight);
+            }
+        }
+        return flightList;
     }
 }

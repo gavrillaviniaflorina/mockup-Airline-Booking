@@ -1,6 +1,7 @@
 package view;
 
 import controller.*;
+import model.Flight;
 import model.Person;
 import model.Ticket;
 
@@ -31,7 +32,7 @@ public class ViewUser {
         String text="";
         text+="Press 0 to log out\n";
         text+="Press 1 to see all your tickets\n";
-        text+="Press 2 to search a flight \n";
+        text+="Press 2 to search  flights \n";
         text+="Press 3 to change your password\n";
         text+="Press 4 to book a ticket\n";
         text+="Press 5 to buy a ticket\n";
@@ -45,12 +46,10 @@ public class ViewUser {
     }
 
     private void allTickets(){
-        System.out.println("Please write your name");
-        String name=scanner.nextLine();
-        Person person= personController.personName(name);
-        if(person.getId()==1){
-            System.out.println("Incorrect name");
-        }else{
+
+        String name=person.getName();
+
+
             List<Ticket> ticketList=ticketController.passengerTicket(passengerController.personPassenger(person.getId()));
             if(ticketList.isEmpty()){
                 System.out.println("You don't have any tickets");
@@ -60,8 +59,32 @@ public class ViewUser {
                 System.out.println(ticket);
             }
             }
-        }
+
     }
+
+    private  void searchFlight(){
+        System.out.println("Please write the name of the flight you want to search");
+        String name=scanner.nextLine();
+
+        List<Flight>flightList= flightController.searchFlight(name);
+        if(flightList.isEmpty()){
+            System.out.println("There is no flight that coresponds");
+        }else{
+            for(Flight flight : flightList){
+                System.out.println(flight.toString());
+            }
+        }
+
+    }
+
+    private void changePassword(){
+        System.out.println("Please introduce your new password" );
+        String password=scanner.nextLine();
+        personController.updatePassword(person.getEmail(),password);
+        System.out.println("Password changed");
+
+    }
+
 
 
 }
