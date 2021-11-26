@@ -81,7 +81,7 @@ public class ViewUser {
         System.out.println("Please introduce your new password" );
         String password=scanner.nextLine();
         personController.updatePassword(person.getEmail(),password);
-        System.out.println("Password changed");
+        System.out.println("Password was changed");
 
     }
 
